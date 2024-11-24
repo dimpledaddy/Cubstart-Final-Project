@@ -4,11 +4,22 @@
 <head>
   <title>Cubstart Final</title>
   <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div>
-        <p>This is our final project for Cubstart Decal</p>
+    <div class="navigation">
+        <div class="navs">Home</div>
+        <div class="navs">About Us</div>
+        <div class="navs">Results</div>
+    </div>
+    <div class="content">
         <div class="Movietunes">MovieTunes</div>
+        <div class="description">Find the music to match your movie.</div>
+        <div class="search">
+            <input type="text" id="search" placeholder="Enter movie name"/>
+            <button onclick="searchObject()">Generate</button>
+            <!-- gonna update button object in script -->
+        </div>
     </div>
     <script src="script.js"></script>
 </body>

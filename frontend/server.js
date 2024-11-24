@@ -8,6 +8,7 @@ const port = 3000;
 const apiKey = process.env.OPENAI_API_KEY;
 
 app.use(express.json());
+app.use(express.static('frontend')); // need to be able to see the changes on styles.css reflected
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));

@@ -1,5 +1,25 @@
-p {
-    font-size: 50px;
+body {
+    background-image: url(./images/background.jpg);
+    text-align: center;
+}
+
+.navigation {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    padding: 20px;
+}
+
+.navs {
+    color: white;
+    font-size: 30;
+    font-family: Inter;
+    font-weight: 500;
+    word-wrap: break-word
+}
+
+.content {
+    text-align: center;
 }
 
 .Movietunes { 
@@ -12,4 +32,34 @@ p {
     font-weight: 700;
     line-height: 120.95%;
     letter-spacing: 16px;
+}
+
+.description {
+    color: #FFF;
+    font-family: Inter;
+    font-size: 35px;
+    font-weight: 500;
+    line-height: normal;
+}
+
+#search {
+    width: 1000px;
+    height: 80px;
+    border-radius: 100px;
+    background: rgba(217, 217, 217, 0.80);
+    background-blend-mode: lighten;
+    box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25);
+}
+
+.search button {
+    border-radius: 100px;
+    width: 300px;
+    height: 80px;
+    background: rgba(217, 217, 217, 0.80);
+    background-blend-mode: lighten;
+    box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25);
+    font-family: 'Inter', sans-serif;
+    font-size: 40px;
+    cursor: pointer;
+    color: #000;
 }
