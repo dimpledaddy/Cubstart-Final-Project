@@ -171,5 +171,9 @@ body {
 }
 .movieDesc{
     color: var(--primary-color);
-    font: Inter;
+    font-size: 30;
+    font-family: Inter;
+    font-weight: 500;
+    word-wrap: break-word;
+    text-decoration: none;
 }
