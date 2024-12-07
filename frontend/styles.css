@@ -1,6 +1,15 @@
+/* Just to make it a bit easier in case we end up changing our colors (i.e. variables we can use instead) EN */
+:root{
+    --primary-color: white;
+    --hover-color: white;
+}
+
 body {
     background-image: url(./images/background.jpg);
     text-align: center;
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
 }
 
 .navigation {
@@ -11,12 +20,29 @@ body {
 }
 
 .navs {
-    color: white;
+    color: var(--primary-color);
     font-size: 30;
     font-family: Inter;
     font-weight: 500;
-    word-wrap: break-word
+    word-wrap: break-word;
+    text-decoration: none;
 }
+
+/* Extra styling for header links so they don't change once clicked (EN)*/
+.navs:visited{
+    color: var(--primary-color);
+}
+.navs:visited{
+    color: var(--primary-color);
+}
+.navs:hover{
+    text-decoration: none;
+}
+.nav:active{
+    color: var(--primary-color);
+}
+
+/* end EN */
 
 .content {
     text-align: center;
@@ -62,4 +88,88 @@ body {
     font-size: 40px;
     cursor: pointer;
     color: #000;
+}
+
+
+/* About Us Page */
+.about-page{
+    background-image: linear-gradient(to bottom, #306189, black);
+    text-align: center;
+    height: 100vh;
+    margin: 0;
+}
+.OurTeam{
+    color: #dea86f;
+    text-align: center;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    font-family: Inter;
+    font-size: 100px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120.95%;
+    letter-spacing: 16px;
+}
+.team{
+    display: flex;
+    justify-content: space-evenly;
+    padding: 50px;
+}
+.person{
+    text-align: center;
+}
+.person-image{
+    border-radius: 10%;
+    width: 160px;
+    height: auto;
+}
+.person-name{
+    color: var(--primary-color)
+}
+
+
+
+/* Results Page */
+.results-page {
+    background: linear-gradient(to bottom, #306189, black, url(./images/background.jpg));
+    text-align: center;
+    height: 100vh;
+    margin: 0;
+    background-size: cover;
+}
+.results{
+    color: #f0cc1a;
+    text-align: center;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    font-family: Inter;
+    font-size: 100px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120.95%;
+    letter-spacing: 16px;
+}
+.songList{
+    display: flex;
+    justify-content: center;
+    gap: 100px;
+    padding: 50px;
+}
+.song{
+    text-align: center;
+}
+.songName{
+    color: var(--primary-color);
+    font-size: 30;
+    font-family: Inter;
+    font-weight: 500;
+    word-wrap: break-word;
+    text-decoration: none;
+}
+.songImage{
+    border-radius: 10%;
+    width: 180px;
+    height: 180px;
+}
+.movieDesc{
+    color: var(--primary-color);
+    font: Inter;
 }
