@@ -38,6 +38,8 @@ async function searchObject() {
       const data = await response.json();
       console.log('Response from backend:', data); 
 
+      console.log("condition 1 check:", Array.isArray(data.songs))
+      console.log("condition 2 check:", data.songs)
       if (data.songs && Array.isArray(data.songs)) {
         localStorage.setItem('movieTunesResults', JSON.stringify(data)); 
         window.location.href = 'results.html'; // go to results page
