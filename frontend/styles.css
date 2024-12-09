@@ -12,6 +12,10 @@ body {
     margin: 0;
 }
 
+.content {
+    padding: 150px;
+}
+
 .navigation {
     display: flex;
     justify-content: center;
@@ -21,11 +25,12 @@ body {
 
 .navs {
     color: var(--primary-color);
-    font-size: 30;
+    font-size: 20px;
     font-family: Inter;
     font-weight: 500;
     word-wrap: break-word;
     text-decoration: none;
+    padding: 10px;
 }
 
 /* Extra styling for header links so they don't change once clicked (EN)*/
@@ -63,29 +68,37 @@ body {
 .description {
     color: #FFF;
     font-family: Inter;
-    font-size: 35px;
-    font-weight: 500;
+    font-size: 30px;
+    padding: 20px;
     line-height: normal;
 }
 
 #search {
     width: 1000px;
-    height: 80px;
+    height: 60px;
     border-radius: 100px;
     background: rgba(217, 217, 217, 0.80);
     background-blend-mode: lighten;
     box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25);
+    padding-left: 30px;
+}
+
+.search {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .search button {
     border-radius: 100px;
     width: 300px;
-    height: 80px;
+    height: 60px;
     background: rgba(217, 217, 217, 0.80);
     background-blend-mode: lighten;
     box-shadow: 0px 4px 4px 5px rgba(0, 0, 0, 0.25);
     font-family: 'Inter', sans-serif;
-    font-size: 40px;
+    font-size: 30px;
     cursor: pointer;
     color: #000;
 }
