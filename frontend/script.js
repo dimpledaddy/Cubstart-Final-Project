@@ -1,35 +1,52 @@
-// testing
-document.addEventListener('DOMContentLoaded', () => {
-    const prompt = "What is a song that matches the vibe of the movie Venom?";
-  
-    fetch('/api/openai', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ prompt }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        console.log('Response from OpenAI:', data.message);
-      })
-      .catch((error) => console.error('Error:', error));
-  });
-
-//   search object inside the search bar
 async function searchObject() {
-    const objectName = document.getElementById("search-input").ariaValueMax;
-    if (objectName === "") {
-        alert("Please enter a movie name.");
-        return;
+  const movieName = document.getElementById("search").value; // get the input value
+  if (movieName === "") { // check if input is empty
+      alert("Please enter a movie name.");
+      return;
+  }
+
+  //don't change this
+  const prompt = `Please return only a JSON object with the format that looks like:
+  {
+    "songs": [
+      {
+        "title": "Song Title",
+        "artist": "Artist Name",
+        "description": "Song description",
+        "image": "URL to song image"
+      },
+      {
+        "title": "Song Title",
+        "artist": "Artist Name",
+        "description": "Song description",
+        "image": "URL to song image"
+      },
+      ...
+    ]
+  }
+  The songs should match the vibe, aesthetic, and mood of the movie ${movieName}.`;
+
+  try {
+      const response = await fetch('/api/openai', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ prompt }),
+      });
+
+      const data = await response.json();
+      console.log('Response from backend:', data); 
+
+      if (data.songs && Array.isArray(data.songs)) {
+        localStorage.setItem('movieTunesResults', JSON.stringify(data)); 
+        window.location.href = 'results.html'; // go to results page
+    } else {
+        console.error('No songs found in the response.', data);
+        alert('No songs found for the movie.');
     }
-    try {
-        const response = await fetch('/api/openai', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-              },
-            body: JSON.stringify({ objectName: objectName})
-        });
-    }
+} catch (error) {
+    console.error('Error:', error);
+    alert('An error occurred. Please try again later.');
+}
 }

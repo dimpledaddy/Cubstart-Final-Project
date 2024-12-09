@@ -7,41 +7,54 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="results-page">
-    <!-- Header: This will be universal in every page (EN)-->
     <div class="navigation">            
         <a class="navs" href="index.html">Home</a>
         <a class="navs" href="about.html">About Us</a>
         <a class="navs" href="results.html" class="nav">Results</a>
     </div>
 
-
-
     <div class="content">
-        <div class="results">Results</div>
-        <div class="songList">
-            <div class="song">
-                <img src="images/blank-to-be-filled.jpg" class="songImage">
-                <p class="songName">Song name</p>
-            </div>
-            <div class="song">
-                <img src="images/blank-to-be-filled.jpg" class="songImage">
-                <p class="songName">Song name</p>
-            </div>
-            <div class="song">
-                <img src="images/blank-to-be-filled.jpg" class="songImage">
-                <p class="songName">Song name</p>
-            </div>
-            <div class="song">
-                <img src="images/blank-to-be-filled.jpg" class="songImage">
-                <p class="songName">Song name</p>
-            </div>
-        </div>
-        
-        <div class="movieDesc">
-            <b>gonna be real no idea how we're gonna code this part so we leave it like this for now!</b>
-        </div>
-
+        <div class="results" id="results">Results</div>
+        <div class="songList" id="songList"></div>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const songListContainer = document.getElementById('songList');
+            // get the results from localStorage, called in scripts
+            const results = localStorage.getItem('movieTunesResults');
+
+            if (results) { // check if data exists
+                try {
+                    const parsedResults = JSON.parse(results);
+                    
+                    if (parsedResults.songs && parsedResults.songs.length > 0) { // make sure there are songs
+                        // following code is for displaying each song,  won't be seen until we succeed, basically creates a div, image, and description
+                        parsedResults.songs.forEach(song => {
+                            const songDiv = document.createElement('div');
+                            songDiv.classList.add('song');
+
+                            const songImage = document.createElement('img');
+                            songImage.src = song.image || "images/blank-to-be-filled.jpg"; 
+                            
+                            const songName = document.createElement('p');
+                            songName.textContent = song.title || "Song name"; 
+
+                            songDiv.appendChild(songImage);
+                            songDiv.appendChild(songName);
+
+                            songListContainer.appendChild(songDiv);
+                        });
+                    } else { // handle no songs
+                        resultsContainer.innerHTML = "<p>No songs found.</p>";
+                    }
+                } catch (error) { // error in parsing data
+                    songListContainer.innerHTML = "<p>Error parsing results.</p>";
+                }
+            } else { // no resuts in localStorage
+                resultsContainer.innerHTML = "<p>No results found.</p>";
+            }
+        });
+    </script>
 </body>
 </html>
