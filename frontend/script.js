@@ -13,12 +13,12 @@ async function searchObject() {
           "title": "Song Title",
           "artist": "Artist Name",
           "description": "Song description",
-          "image": "URL to song image"
+          "image": "Absolute URL to the song's image (e.g. album cover). Retrieve an absolute URL from Google Images"
         }
       ]
     }
     Strictly adhere to this format, without any additional text.
-  The songs should match the vibe, aesthetic, and mood of the movie ${movieName}.`;
+  The songs should match the vibe, aesthetic, and mood of the movie ${movieName}. Try to return at least 2-3 songs.`;
 
   try { // throw error so no crash
       const response = await fetch('/api/openai', {
@@ -29,8 +29,10 @@ async function searchObject() {
           body: JSON.stringify({ prompt }),
       });
 
-      const data = await response.json();
-      console.log('Response from backend:', data); // log to check 
+      const textResponse = await response.text();
+      console.log('Raw response from backend: ', textResponse)
+      const data = JSON.parse(textResponse)
+      console.log('JSON Response from backend:', data);
 
       if (data.songs) { // check
         localStorage.setItem('movieTunesResults', JSON.stringify(data));  
@@ -40,8 +42,8 @@ async function searchObject() {
         console.error('No songs found in the response.', data);
         alert('No songs found for the movie.');
     }
-} catch (error) {
-    console.error('Error:', error);
-    alert('An error occurred. Please try again later.');
-}
+  } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+  }
 }
