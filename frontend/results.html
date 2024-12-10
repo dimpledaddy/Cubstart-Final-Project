@@ -22,38 +22,30 @@
         document.addEventListener('DOMContentLoaded', () => {
             const songListContainer = document.getElementById('songList');
             // get the results from localStorage, called in scripts
-            const results = localStorage.getItem('movieTunesResults');
+            const storedResults = localStorage.getItem('movieTunesResults');
 
-            if (results) { // check if data exists
-                try {
-                    const parsedResults = JSON.parse(results);
-                    
-                    if (parsedResults.songs && parsedResults.songs.length > 0) { // make sure there are songs
-                        // following code is for displaying each song,  won't be seen until we succeed, basically creates a div, image, and description
-                        parsedResults.songs.forEach(song => {
-                            const songDiv = document.createElement('div');
-                            songDiv.classList.add('song');
+try {
+  const parsedResults = JSON.parse(storedResults);
 
-                            const songImage = document.createElement('img');
-                            songImage.src = song.image || "images/blank-to-be-filled.jpg"; 
-                            
-                            const songName = document.createElement('p');
-                            songName.textContent = song.title || "Song name"; 
-
-                            songDiv.appendChild(songImage);
-                            songDiv.appendChild(songName);
-
-                            songListContainer.appendChild(songDiv);
-                        });
-                    } else { // handle no songs
-                        resultsContainer.innerHTML = "<p>No songs found.</p>";
-                    }
-                } catch (error) { // error in parsing data
-                    songListContainer.innerHTML = "<p>Error parsing results.</p>";
-                }
-            } else { // no resuts in localStorage
-                songListContainer.innerHTML = "<p>No results found.</p>";
-            }
+  if (parsedResults && Array.isArray(parsedResults.songs)) {
+    const resultsContainer = document.getElementById('results');
+    parsedResults.songs.forEach((song) => {
+      const songElement = document.createElement('div');
+      songElement.innerHTML = `
+        <h3>${song.title} by ${song.artist}</h3>
+        <p>${song.description}</p>
+        <img src="${song.image}" alt="${song.title}" />
+      `;
+      resultsContainer.appendChild(songElement);
+    });
+  } else {
+    throw new Error('Invalid data format');
+  }
+} catch (error) {
+  console.error('Error parsing results:', error);
+  const resultsContainer = document.getElementById('results');
+  resultsContainer.innerHTML = 'Error parsing results.';
+}
         });
     </script>
 </body>
