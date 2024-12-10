@@ -6,27 +6,21 @@ async function searchObject() {
   }
 
   //don't change this
-  const prompt = `Please return only a JSON object with the format that looks like:
-  {
-    "songs": [
-      {
-        "title": "Song Title",
-        "artist": "Artist Name",
-        "description": "Song description",
-        "image": "URL to song image"
-      },
-      {
-        "title": "Song Title",
-        "artist": "Artist Name",
-        "description": "Song description",
-        "image": "URL to song image"
-      },
-      ...
-    ]
-  }
+  const prompt = `Please return ONLY a valid JSON object formatted as follows:
+    {
+      "songs": [
+        {
+          "title": "Song Title",
+          "artist": "Artist Name",
+          "description": "Song description",
+          "image": "URL to song image"
+        }
+      ]
+    }
+    Strictly adhere to this format, without any additional text.
   The songs should match the vibe, aesthetic, and mood of the movie ${movieName}.`;
 
-  try {
+  try { // throw error so no crash
       const response = await fetch('/api/openai', {
           method: 'POST',
           headers: {
@@ -36,14 +30,13 @@ async function searchObject() {
       });
 
       const data = await response.json();
-      console.log('Response from backend:', data); 
+      console.log('Response from backend:', data); // log to check 
 
-      console.log("condition 1 check:", Array.isArray(data.songs))
-      console.log("condition 2 check:", data.songs)
-      if (data.songs && Array.isArray(data.songs)) {
-        localStorage.setItem('movieTunesResults', JSON.stringify(data)); 
-        window.location.href = 'results.html'; // go to results page
+      if (data.songs && Array.isArray(data.songs)) { // check
+        localStorage.setItem('movieTunesResults', JSON.stringify(data));  
+        window.location.href = 'results.html'; // go to results page upon clicking generate
     } else {
+        console.log('OpenAI Response 2:', response.data.choices[0].message.content);
         console.error('No songs found in the response.', data);
         alert('No songs found for the movie.');
     }

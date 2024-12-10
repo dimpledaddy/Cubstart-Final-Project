@@ -24,7 +24,7 @@ app.post('/api/openai', async (req, res) => {
       {
         model: 'gpt-4-turbo',
         messages: [{ role: 'user', content: prompt }],
-        max_tokens: 100,
+        max_tokens: 300,
         "response_format": {"type": "json_object"},
       },
       {
