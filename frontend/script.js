@@ -13,12 +13,12 @@ async function searchObject() {
           "title": "Song Title",
           "artist": "Artist Name",
           "description": "Song description",
-          "image": "Absolute URL to the song's album cover"
+          "image": "Absolute URL to the song's image (e.g. album cover). Retrieve an absolute URL from Google Images"
         }
       ]
     }
     Strictly adhere to this format, without any additional text.
-  The songs should match the vibe, aesthetic, and mood of the movie ${movieName}.`;
+  The songs should match the vibe, aesthetic, and mood of the movie ${movieName}. Try to return at least 2-3 songs.`;
 
   try { // throw error so no crash
       const response = await fetch('/api/openai', {

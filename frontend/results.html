@@ -39,14 +39,19 @@
                             const songImage = document.createElement('img');
                             songImage.classList.add('songImage')
                             console.log(song.image)
-                            songImage.src = (song.image) || "images/blank-to-be-filled.jpg"; 
+                            songImage.src = "images/blank-to-be-filled.jpg"; // slight lie but all good
                             
                             const songName = document.createElement('p');
                             songName.classList.add('songName')
-                            songName.textContent = song.title || "Song name"; 
+                            songName.textContent = song.title || "Song Name";
+                            
+                            const songArtist = document.createElement('p');
+                            songArtist.classList.add('artist')
+                            songArtist.textContent = song.artist || "Artist Name"
 
                             songDiv.appendChild(songImage);
                             songDiv.appendChild(songName);
+                            songDiv.appendChild(songArtist);
 
                             songListContainer.appendChild(songDiv);
                         });
