@@ -25,6 +25,7 @@ app.post('/api/openai', async (req, res) => {
         model: 'gpt-4-turbo',
         messages: [{ role: 'user', content: prompt }],
         max_tokens: 100,
+        "response_format": {"type": "json_object"},
       },
       {
         headers: {
@@ -38,7 +39,7 @@ app.post('/api/openai', async (req, res) => {
     console.log('OpenAI Response:', response.data);
 
     // mod the response according to the correct structure
-    res.json({ songs: response.data.choices[0].message.content });
+    res.json({ songs: JSON.parse(response.data.choices[0].message.content) });
   } catch (error) {
     console.error('Error with OpenAI API:', error);
     res.status(500).json({ error: 'Error fetching response' });
