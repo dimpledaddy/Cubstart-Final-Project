@@ -24,36 +24,14 @@
             // get the results from localStorage, called in scripts
             const storedResults = localStorage.getItem('movieTunesResults');
 
-try {
-  const parsedResults = JSON.parse(storedResults);
-
-  if (parsedResults && Array.isArray(parsedResults.songs)) {
-    const resultsContainer = document.getElementById('results');
-    parsedResults.songs.forEach((song) => {
-      const songElement = document.createElement('div');
-      songElement.innerHTML = `
-        <h3>${song.title} by ${song.artist}</h3>
-        <p>${song.description}</p>
-        <img src="${song.image}" alt="${song.title}" />
-      `;
-      resultsContainer.appendChild(songElement);
-    });
-  } else {
-    throw new Error('Invalid data format');
-  }
-} catch (error) {
-  console.error('Error parsing results:', error);
-  const resultsContainer = document.getElementById('results');
-  resultsContainer.innerHTML = 'Error parsing results.';
-}
             if (results) { // check if data exists
                 try {
                     const parsedResults = JSON.parse(results);            
                     console.log('Parsed Results: ', parsedResults)
                     console.log('.songs.songs Check: ', parsedResults.songs.songs, parsedResults.songs.songs.length > 0)
-                    
+
                     if (parsedResults.songs.songs && parsedResults.songs.songs.length > 0) { // make sure there are songs
-                        // following code is for displaying each song,  won't be seen until we succeed, basically creates a div, image, and description
+                    
                         parsedResults.songs.songs.forEach(song => {
                             const songDiv = document.createElement('div');
                             songDiv.classList.add('song');
@@ -62,7 +40,7 @@ try {
                             songImage.classList.add('songImage')
                             console.log(song.image)
                             songImage.src = (song.image) || "images/blank-to-be-filled.jpg"; 
-                            
+
                             const songName = document.createElement('p');
                             songName.classList.add('songName')
                             songName.textContent = song.title || "Song name"; 
