@@ -13,7 +13,7 @@ async function searchObject() {
           "title": "Song Title",
           "artist": "Artist Name",
           "description": "Song description",
-          "image": "URL to song image"
+          "image": "Absolute URL to the song's album cover"
         }
       ]
     }
@@ -29,10 +29,13 @@ async function searchObject() {
           body: JSON.stringify({ prompt }),
       });
 
-      const data = await response.json();
-      console.log('Response from backend:', data); // log to check 
+      const textResponse = await response.text();
+      console.log('Raw response from backend: ', textResponse)
+      const data = JSON.parse(textResponse)
+      console.log('JSON Response from backend:', data);
 
-      if (data.songs && Array.isArray(data.songs)) { // check
+      console.log('Backend Response Checks: ', data.songs, Array.isArray(data.songs.songs), typeof data.songs.songs)
+      if (data.songs && Array.isArray(data.songs.songs)) { // check
         localStorage.setItem('movieTunesResults', JSON.stringify(data));  
         window.location.href = 'results.html'; // go to results page upon clicking generate
     } else {
@@ -40,8 +43,8 @@ async function searchObject() {
         console.error('No songs found in the response.', data);
         alert('No songs found for the movie.');
     }
-} catch (error) {
-    console.error('Error:', error);
-    alert('An error occurred. Please try again later.');
-}
+  } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again later.');
+  }
 }
