@@ -46,6 +46,41 @@ try {
   const resultsContainer = document.getElementById('results');
   resultsContainer.innerHTML = 'Error parsing results.';
 }
+            if (results) { // check if data exists
+                try {
+                    const parsedResults = JSON.parse(results);            
+                    console.log('Parsed Results: ', parsedResults)
+                    console.log('.songs.songs Check: ', parsedResults.songs.songs, parsedResults.songs.songs.length > 0)
+                    
+                    if (parsedResults.songs.songs && parsedResults.songs.songs.length > 0) { // make sure there are songs
+                        // following code is for displaying each song,  won't be seen until we succeed, basically creates a div, image, and description
+                        parsedResults.songs.songs.forEach(song => {
+                            const songDiv = document.createElement('div');
+                            songDiv.classList.add('song');
+
+                            const songImage = document.createElement('img');
+                            songImage.classList.add('songImage')
+                            console.log(song.image)
+                            songImage.src = (song.image) || "images/blank-to-be-filled.jpg"; 
+                            
+                            const songName = document.createElement('p');
+                            songName.classList.add('songName')
+                            songName.textContent = song.title || "Song name"; 
+
+                            songDiv.appendChild(songImage);
+                            songDiv.appendChild(songName);
+
+                            songListContainer.appendChild(songDiv);
+                        });
+                    } else { // handle no songs
+                        resultsContainer.innerHTML = "<p>No songs found.</p>";
+                    }
+                } catch (error) { // error in parsing data
+                    songListContainer.innerHTML = "<p>Error parsing results.</p>";
+                }
+            } else { // no resuts in localStorage
+                songListContainer.innerHTML = "<p>No results found.</p>";
+            }
         });
     </script>
 </body>
